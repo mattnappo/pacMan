@@ -28,7 +28,7 @@ class PacMan():
         self.y = y
         self.points = 0
 
-        self.vel = 1
+        self.vel = 5
 
         self.up = False
         self.down = False
