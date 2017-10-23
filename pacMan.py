@@ -15,6 +15,12 @@ class PacMan():
         self.direction = ""
         self.barriers = barriers
     def detect(self):
+        if self.x + self.width + 2 >= 457:
+            self.x = 457 - self.width - 4
+            self.spr.x = self.x
+        elif self.x + 4 <= 0:
+            self.x = 0
+            self.spr.x = self.x
         for barrier in self.barriers:
             if self.x + self.width >= barrier.x and barrier.x + barrier.width <= self.x:
                 if self.y <= barrier.y + barrier.height and self.y + self.height >= barrier.y:

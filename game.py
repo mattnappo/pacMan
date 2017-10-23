@@ -1,10 +1,10 @@
 import pyglet
 from pyglet.window import key
-
+from pyglet.gl import *
 from pacMan import PacMan
 from dot import Dot
 from barrier import Barrier
-
+from rect import Rect
 #----------------SETUP SPRITES & ANIMATION----------------
 def loader(location, listName, amount):
     for i in range(amount):
@@ -41,8 +41,9 @@ keys = key.KeyStateHandler()
 window.push_handlers(keys)
 #----------------CREATE OBJECTS----------------
 barriers = [
-    Barrier(10, 10, 50, 67)
+    Barrier(49, 525, 50, 67)
 ]
+
 char = PacMan(0, 0, barriers)
 #----------------EVENTS---------------------
 @window.event
