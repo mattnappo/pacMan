@@ -7,7 +7,7 @@ class PacMan():
         self.width = 30
         self.img = pyglet.image.load("img/spr/pacMan/up/0.png")
         self.spr = pyglet.sprite.Sprite(self.img, x=self.x, y=self.y)
-        self.vel = 9
+        self.vel = 10
         self.up = False
         self.down = False
         self.left = False
@@ -15,16 +15,27 @@ class PacMan():
         self.direction = ""
         self.barriers = barriers
     def detect(self):
-        if self.x + self.width + 2 >= 457:
-            self.x = 457 - self.width - 4
+        if self.x + self.width >= 467:
+            self.x = 467 - self.width
             self.spr.x = self.x
-        elif self.x + 4 <= 0:
+        elif self.x <= 0:
             self.x = 0
             self.spr.x = self.x
         for barrier in self.barriers:
-            if self.x + self.width >= barrier.x and barrier.x + barrier.width <= self.x:
-                if self.y <= barrier.y + barrier.height and self.y + self.height >= barrier.y:
-                    print("DETECTED")
+            if self.x >= barrier.x and self.x <= barrier.x + barrier.width:
+                if self.y >= barrier.y and barrier.height >= self.y:
+                    print(self.direction)
+                    if self.direction == "right":
+                        self.x = barrier.x + barrier.width
+                    elif self.direction == "left":
+                        self.y = barrier.y + barrier.width
+                    elif self.direction == "up":
+                        self.y = barrier.y
+                    elif self.direction == "down":
+                        self.y = barrier.y + barrier.height
+                    self.spr.x = self.x
+                    self.spr.y = self.y
+
     def move(self):
         self.detect()
         # CONTINUE MOVING WHEN NO KEYPRESS

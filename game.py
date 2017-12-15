@@ -36,15 +36,17 @@ def animatePac(dt):
         else:
             pacCycle = 0
 #----------------SETUP GAME--------------------
-window = pyglet.window.Window(457, 566)
+window = pyglet.window.Window(467, 566)
 keys = key.KeyStateHandler()
 window.push_handlers(keys)
 #----------------CREATE OBJECTS----------------
 barriers = [
-    Barrier(49, 525, 50, 67)
+    #Barrier(x, y, wid, h)
+    Barrier(50, 50, 50, 100)
 ]
 
 char = PacMan(0, 0, barriers)
+
 #----------------EVENTS---------------------
 @window.event
 def on_draw():
@@ -106,5 +108,5 @@ def on_key_release(symbol, modifiers):
         char.down = False
 # def deClogger(dt):
 # pyglet.clock.schedule_interval(deClogger, 1/60.0)
-pyglet.clock.schedule_interval(animatePac, 1/14.0)
+pyglet.clock.schedule_interval(animatePac, 1/16.0)
 pyglet.app.run()
