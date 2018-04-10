@@ -4,7 +4,6 @@ from pyglet.gl import *
 from pacMan import PacMan
 from dot import Dot
 from barrier import Barrier
-from rect import Rect
 #----------------SETUP SPRITES & ANIMATION----------------
 def loader(location, listName, amount):
     for i in range(amount):
@@ -42,12 +41,12 @@ window.push_handlers(keys)
 #----------------CREATE OBJECTS----------------
 barriers = [
     #Barrier(x, y, wid, h)
-    Barrier(50, 50, 50, 100)
+    Barrier(42, 42, 50, 64)
 ]
 
 char = PacMan(0, 0, barriers)
 
-#----------------EVENTS---------------------
+#----------------ANIMATION---------------------
 @window.event
 def on_draw():
     global pacCycle
@@ -64,7 +63,7 @@ def on_draw():
             char.spr = pacDown[pacCycle]
     char.move()
     char.spr.draw()
-
+#----------------KEY EVENTS---------------------
 @window.event
 def on_key_press(symbol, modifiers):
     global pacAnimate
@@ -94,9 +93,6 @@ def on_key_press(symbol, modifiers):
         char.up = False
         char.direction = "down"
 @window.event
-def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
-    pyglet.graphics.draw(4, pyglet.gl.GL_QUADS, ('v2f', [x, y, x-dx, y, x-dx, y-dy, x, y-dy]))
-@window.event
 def on_key_release(symbol, modifiers):
     if symbol == key.A:
         char.left = False
@@ -106,6 +102,11 @@ def on_key_release(symbol, modifiers):
         char.up = False
     elif symbol == key.S:
         char.down = False
+@window.event
+def on_mouse_motion(x, y, dx, dy):
+    pass
+    # print(x, y)
+#----------------CLOCK---------------------
 # def deClogger(dt):
 # pyglet.clock.schedule_interval(deClogger, 1/60.0)
 pyglet.clock.schedule_interval(animatePac, 1/16.0)
